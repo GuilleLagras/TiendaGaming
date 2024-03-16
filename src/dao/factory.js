@@ -19,8 +19,9 @@ switch (persistence) {
         MessagesManager = (await import('./Mongo/manager/message.dao.js')).default;
         break;
     case 'Memory':
-        logger.info('Trabajando con Memoria');
-        //agregar persistencias memory
+        // logger.info('Trabajando con Memoria');
+        // //agregar persistencias memory
+        // ProductsManager = require('./Mongo/manager/products.dao.js').default;
         break;
     default:
         logger.error('Persistencia no válida en la configuración.');
