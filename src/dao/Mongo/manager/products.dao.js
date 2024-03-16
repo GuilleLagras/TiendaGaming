@@ -2,7 +2,7 @@
 import BasicManager from "./basic.dao.js";
 import { productsModel } from "../models/Product.model.js";
 
-export default class ProductManager extends BasicManager {
+export default class ProductsManager extends BasicManager {
   constructor() {
     super(productsModel, ''); 
 }
