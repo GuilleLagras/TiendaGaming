@@ -34,58 +34,58 @@ class UsersController {
 
 
 
-async login(req, res, next) {
-  passport.authenticate('login', async (err, user, info) => {
+  async login(req, res, next) {
+    passport.authenticate('login', async (err, user, info) => {
       try {
-          if (err || !user) {
-              throw new Error("Error de autenticación");
+        if (err || !user) {
+          throw new Error("Error de autenticación");
+        }
+
+        req.login(user, { session: false }, async (error) => {
+          if (error) {
+            throw new Error("Error de inicio de sesión");
           }
 
-          req.login(user, { session: false }, async (error) => {
-            if (error) {
-                throw new Error("Error de inicio de sesión");
-            }
-        
-            const { Usuario, email, role, cartId, _id , last_connection, avatar} = user;
-            
-            user.last_connection = new Date();
-            await user.save();
-        
-            const userResDTO = new UserResDTO(user);
-        
-            const token = generateToken({ Usuario, email, role, cartId, _id, last_connection,avatar});
-        
-            res.cookie('token', token, { maxAge: 120000, httpOnly: true });
-            res.redirect('/api/products');
+          const { Usuario, email, role, cartId, _id, last_connection, avatar } = user;
+
+          user.last_connection = new Date();
+          await user.save();
+
+          const userResDTO = new UserResDTO(user);
+
+          const token = generateToken({ Usuario, email, role, cartId, _id, last_connection, avatar });
+
+          res.cookie('token', token, { maxAge: 120000, httpOnly: true });
+          res.redirect('/api/products');
         });
       } catch (error) {
-          handleErrors(res, customError.generateError(errorMessage.LOGIN_ERROR, 500, errorName.LOGIN_ERROR));
+        handleErrors(res, customError.generateError(errorMessage.LOGIN_ERROR, 500, errorName.LOGIN_ERROR));
       }
-  })(req, res, next);
-}
-//signout 
-
-
-async signout(req, res) {
-  try {
-    res.clearCookie('token');
-
-    const userId = req.user._id;
-
-    if (userId) {
-      const user = await usersService.findById(userId)
-      if (user) {
-        user.last_connection = new Date();
-        await user.save();
-      }
-    }
-
-    res.redirect('/login');
-  } catch (error) {
-    console.error('error: ' + error);
-     res.status(500).send('Error al cerrar sesión');
+    })(req, res, next);
   }
-}
+  //signout 
+
+
+  async signout(req, res) {
+    try {
+      res.clearCookie('token');
+
+      const userId = req.user._id;
+
+      if (userId) {
+        const user = await usersService.findById(userId)
+        if (user) {
+          user.last_connection = new Date();
+          await user.save();
+        }
+      }
+
+      res.redirect('/login');
+    } catch (error) {
+      console.error('error: ' + error);
+      res.status(500).send('Error al cerrar sesión');
+    }
+  }
 
 
   async restore(req, res) {
@@ -95,7 +95,7 @@ async signout(req, res) {
 
       if (!user) {
         return res.status(404).json({ message: 'Correo electrónico no encontrado en la base de datos' });
-    }
+      }
 
       const resetToken = generateResetToken(email);
       user.resetToken = {
@@ -116,38 +116,38 @@ async signout(req, res) {
     const token = req.params.token;
 
     try {
-        const user = await usersService.findByResetToken(token.toString());
+      const user = await usersService.findByResetToken(token.toString());
 
-        if (!user || !user.resetToken || user.resetToken.expiration < new Date()) {
-            return res.redirect('/restore');
-        }
+      if (!user || !user.resetToken || user.resetToken.expiration < new Date()) {
+        return res.redirect('/restore');
+      }
 
-        const isSamePassword = await compareData(newPassword, user.password);
+      const isSamePassword = await compareData(newPassword, user.password);
 
-        if (isSamePassword) {
-            return res.status(400).json({ message: 'No puedes restablecer la nueva contraseña con tu contraseña actual.' });
-        }
+      if (isSamePassword) {
+        return res.status(400).json({ message: 'No puedes restablecer la nueva contraseña con tu contraseña actual.' });
+      }
 
-        const hashedPassword = await hashData(newPassword);
-        user.password = hashedPassword;
-        user.resetToken = null;
-        await user.save();
+      const hashedPassword = await hashData(newPassword);
+      user.password = hashedPassword;
+      user.resetToken = null;
+      await user.save();
 
-        return res.status(200).json({ success: 'Contraseña restablecida con éxito.' });
+      return res.status(200).json({ success: 'Contraseña restablecida con éxito.' });
     } catch (error) {
-        return res.status(500).json({ error: 'Error durante el restablecimiento de la contraseña.' });
+      return res.status(500).json({ error: 'Error durante el restablecimiento de la contraseña.' });
     }
-}
+  }
 
 
   async githubCallback(req, res) {
     try {
-      const { Usuario, email, role, cartId , _id, last_connection, avatar } = req.user;
-      const token = generateToken({ Usuario, email, role, cartId , _id, last_connection, avatar });
-      
+      const { Usuario, email, role, cartId, _id, last_connection, avatar } = req.user;
+      const token = generateToken({ Usuario, email, role, cartId, _id, last_connection, avatar });
+
       req.user.last_connection = new Date();
       await req.user.save();
-  
+
       res.cookie('token', token, { maxAge: 120000, httpOnly: true });
       res.redirect('/api/products');
     } catch (error) {
@@ -161,7 +161,7 @@ async signout(req, res) {
       session: false,
     })(req, res);
   }
-  
+
   async getCurrentUser(req, res) {
     try {
       const userResponseDTO = new UserResDTO(req.user);
@@ -171,9 +171,9 @@ async signout(req, res) {
       handleErrors(res, customError.generateError(errorMessage.GET_CURRENT_USER_ERROR, 500, errorName.GET_CURRENT_USER_ERROR));
     }
   }
-  
+
   async updatePremiumUser(req, res) {
-  try {
+    try {
       const { uid } = req.params;
       const { newRole } = req.body;
 
@@ -181,7 +181,7 @@ async signout(req, res) {
       const user = await usersService.findById(uid);
 
       if (!user) {
-          return handleErrors(res, customError.generateError(errorMessage.USER_NOT_FOUND, 404, errorName.USER_NOT_FOUND));
+        return handleErrors(res, customError.generateError(errorMessage.USER_NOT_FOUND, 404, errorName.USER_NOT_FOUND));
       }
 
       if (reqUserRole.role === 'Admin') {
@@ -190,89 +190,90 @@ async signout(req, res) {
         //return res.json({ userId: uid, currentRole: user.role });
         return res.redirect('/adminPanel')
       }
-  
+
       const docs = user.documents;
       const dni = docs.find((d) => d.name === "dni");
       const bank = docs.find((d) => d.name === "bank");
       const address = docs.find((d) => d.name === "address");
 
       if (!dni) {
-          return res.status(400).json({ error: 'Falta el documento "dni".' });
+        return res.status(400).json({ error: 'Falta el documento "dni".' });
       }
 
       if (!bank) {
-          return res.status(400).json({ error: 'Falta el documento "bank".' });
+        return res.status(400).json({ error: 'Falta el documento "bank".' });
       }
 
       if (!address) {
-          return res.status(400).json({ error: 'Falta el documento "address".' });
+        return res.status(400).json({ error: 'Falta el documento "address".' });
       }
 
-      
+
       user.role = newRole;
       await user.save();
       return res.json({ userId: uid, currentRole: user.role });
 
-  } catch (error) {
+    } catch (error) {
       return handleErrors(res, customError.generateError(errorMessage.UPDATE_PREMIUM_USER_ERROR, 500, errorName.UPDATE_PREMIUM_USER_ERROR));
+    }
   }
-}
 
-async uploadDocuments(req, res) {
-  const id = req.params.id;
-  upload.fields([
+  async uploadDocuments(req, res) {
+    const id = req.params.id;
+    upload.fields([
       { name: 'dni', maxCount: 1 },
       { name: 'address', maxCount: 1 },
       { name: 'bank', maxCount: 1 }
-  ])(req, res, async (err) => {
+    ])(req, res, async (err) => {
       if (err) {
-          return res.status(500).json({ error: err.message });
+        return res.status(500).json({ error: err.message });
       }
 
       try {
-          const { dni, address, bank } = req.files;
+        const { dni, address, bank } = req.files;
 
-          const response = await usersService.saveUserDocs(id, { dni, address, bank });
+        const response = await usersService.saveUserDocs(id, { dni, address, bank });
 
-          res.status(200).json({ success: true, message: 'Documentos actualizados con éxito', response });
+        res.status(200).json({ success: true, message: 'Documentos actualizados con éxito', response });
       } catch (error) {
         if (!(error.code === 400 && error.message.includes('Missing documents'))) {
           res.status(error.code || 500).json({ success: false, error: error.message });
-      } else {
+        } else {
           res.status(400).json({ success: false, error: error.message });
+        }
       }
+    });
   }
-  });
-}
 
-async updateAvatar(req, res) { 
-  const uid = req.params.uid;
-console.log('id:'+ uid)
-  upload.single('profile')(req, res, async (err) => {
-    if (err) {
-      return res.status(500).json({ error: err.message });
-    }
+  async updateAvatar(req, res) {
+    const uid = req.params.uid;
+    console.log('id:' + uid)
+    upload.single('profile')(req, res, async (err) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
 
-    try {
-      const updatedUserData = {
-        avatar: req.file.filename,
-      };
-      const updatedUser = await usersService.updateUserAvatar(uid, updatedUserData);
-      console.log(updatedUser);
+      try {
+        const updatedUserData = {
+          avatar: req.file.filename,
+        };
+        const updatedUser = await usersService.updateUserAvatar(uid, updatedUserData);
+        console.log(updatedUser);
 
-res.status(200).json({ success: true, message: 'Avatar actualizado con éxito', updatedUser });
+        res.status(200).json({ success: true, message: 'Avatar actualizado con éxito', updatedUser });
 
-    } catch (error) {
-      console.error('error' + error);
-      res.status(error.code || 500).json({ error: error.message });
-    }
-  })}; 
+      } catch (error) {
+        console.error('error' + error);
+        res.status(error.code || 500).json({ error: error.message });
+      }
+    })
+  };
 
   async deleteUserById(req, res) {
     try {
       const id = req.params.id
       await usersService.deleteUserById(id);
-      res.redirect('/adminPanel'); 
+      res.redirect('/adminPanel');
     } catch (error) {
       res.status(error.code || 500).json({ error: error.message });
     }

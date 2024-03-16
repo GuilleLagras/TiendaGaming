@@ -3,9 +3,9 @@ import passport from 'passport'
 import { usersController } from '../controllers/users.controller.js';
 import { jwtValidator } from '../middlewares/jwt.middleware.js';
 import { authMiddleware } from '../middlewares/auth.middleware.js';
-const sessionRouter = Router()
-;
-const userAuthMiddleware = ['Admin', 'User','Premium']
+
+const sessionRouter = Router();
+const userAuthMiddleware = ['Admin', 'User', 'Premium']
 //Local
 sessionRouter.post('/signup', (req, res, next) => usersController.signup(req, res, next));
 sessionRouter.post('/login', (req, res, next) => usersController.login(req, res, next));
@@ -23,6 +23,5 @@ sessionRouter.get('/callback', passport.authenticate('github', { session: false 
 sessionRouter.get('/current', passport.authenticate('jwt', { session: false }), (req, res) => usersController.getCurrentUser(req, res));
 //Signout
 sessionRouter.get('/signout', passport.authenticate('jwt', { session: false }), (req, res) => usersController.signout(req, res));
-
 
 export default sessionRouter;

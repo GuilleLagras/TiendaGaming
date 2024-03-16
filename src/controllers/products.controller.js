@@ -47,12 +47,12 @@ class ProductController {
       handleErrors(res, customError.generateError(errorMessage.CREATE_PRODUCT_ERROR, 400, errorName.CREATE_PRODUCT_ERROR));
     }
   }
- 
 
-async createProductMulter(req, res)  {
+
+  async createProductMulter(req, res) {
     try {
       const thumbnails = req.file;
-  
+
       const productData = {
         title: req.body.title,
         description: req.body.description,
@@ -65,7 +65,7 @@ async createProductMulter(req, res)  {
         owner: req.body.userRole || 'Premium',
         ownerEmail: req.body.userEmail || null,
       };
-  
+
       try {
         const createdProduct = await productService.createProduct(productData);
         res.status(200).json({ message: 'Producto agregado correctamente', product: createdProduct });
@@ -78,7 +78,7 @@ async createProductMulter(req, res)  {
       handleErrors(res, customError.generateError(errorMessage.CREATE_PRODUCT_ERROR, 400, errorName.CREATE_PRODUCT_ERROR));
     }
   };
-  
+
 
   async updateProductById(req, res) {
     const productId = req.params.pid;
@@ -94,9 +94,9 @@ async createProductMulter(req, res)  {
       }
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
-      handleErrors(res, customError.generateError(errorMessage.UPDATE_PRODUCT_ERROR,500, errorName.UPDATE_PRODUCT_ERROR));
-   }
-   
+      handleErrors(res, customError.generateError(errorMessage.UPDATE_PRODUCT_ERROR, 500, errorName.UPDATE_PRODUCT_ERROR));
+    }
+
   }
 
   async deleteProductById(req, res) {

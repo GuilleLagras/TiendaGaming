@@ -1,24 +1,24 @@
 import { expect } from "chai";
 import supertest from "supertest";
 
-const requester = supertest('http://localhost:8080'); 
+const requester = supertest('http://localhost:8080');
 
 
 
 describe('Get All Products', () => {
 
-    it('should get all products', async () => {
-    
+  it('should get all products', async () => {
+
     const response = await requester.get('/products').query({ limit: 10 });
-    
+
     expect(response.body).to.have.all.keys("hasNextPage", "hasPrevPage", "nextLink", "page", "payload", "prevLink", "status", "totalPages");
     expect(response.body.payload).to.be.an('array');
   });
-  });
+});
 
 describe('Products testing , CRUD operations', () => {
 
-    let productId;
+  let productId;
 
   it('should create a new product', async () => {
     const productMock = {
@@ -43,8 +43,8 @@ describe('Products testing , CRUD operations', () => {
     expect(response.body.product).to.have.property('_id');
 
 
-    productId = response.body.product._id; 
-});
+    productId = response.body.product._id;
+  });
 
   it('should update an existing product', async () => {
     const updatedProductMock = {
@@ -66,10 +66,10 @@ describe('Products testing , CRUD operations', () => {
   });
 
   it('should delete the created product', async () => {
-    const response  = await requester.delete(`/products/${productId}`)
+    const response = await requester.delete(`/products/${productId}`)
       .expect(200);
 
-      expect(response.body.message).to.equal('Producto eliminado correctamente')
+    expect(response.body.message).to.equal('Producto eliminado correctamente')
   });
 
 });

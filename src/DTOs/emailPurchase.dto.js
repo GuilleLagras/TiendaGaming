@@ -1,4 +1,3 @@
-
 export default class EmailProductDTO {
   constructor(title, quantity, price) {
     this.title = title;

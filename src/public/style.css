@@ -32,7 +32,7 @@
   height: 2px; 
   bottom: 0;
   left: 0;
-  background-image: linear-gradient(90deg,#FFFF00, rgb(237, 15, 111) , #22c96b/*,* #FFFF00*/) ;
+  background-image: linear-gradient(90deg,#530097, rgb(237, 15, 111) , #6600b9/*,* #FFFF00*/) ;
   visibility: hidden;
   transform: scaleX(0);
   transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
@@ -620,12 +620,12 @@ background-color: #282727;
       top: 30px;
       right: 20px;
        z-index: 999; 
-  border-radius: 50px;
-  padding: 20px;
-  background-color: #22c96b;
+  border-radius: 50%;
+  padding: 15px;
+  background-color: #8c00ff;
 }
 #carrito:hover{
-  box-shadow: 0 0 10px #00ff00;
+  box-shadow: 0 0 10px #a235fc;
 }
 #carrito .badge {
   position: absolute;
