@@ -1,0 +1,313 @@
+paths:
+  /api/carts:
+    get:
+      summary: Get All Carts
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: All Carts 
+        '500':
+          description: Server Error
+        '404':
+          description: Carts not found
+    post:
+      summary: Create Carts
+      tags:
+        - Carts
+      responses:
+        '200':
+          description: Cart Created 
+        '400':
+          description: Cart not created
+        '500':
+          description: Server Error
+
+  /api/carts/{idCart}:
+    get:
+      summary: Get Cart By Id 
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path 
+          description: ID of the cart 
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Cart found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
+              example:
+                cart:
+                  _id: "65b978b691e768c747da7ee6"
+                  products:
+                    - product:
+                        _id: "65b19ebc3250bf4167b53ab2"
+                        title: "Resident Evil VIII"
+                        description: "ps5"
+                        price: 54000
+                        category: "Videojuegos"
+                        code: "57575"
+                        stock: 88
+                        status: true
+                        thumbnails: ["http:imagen.com/image.jpg"]
+                        owner: "Premium"
+                        ownerEmail: "guille_ivan92@hotmail.com"
+                        __v: 0
+                      quantity: 1
+                  total: 54000
+                  cartLenght: 1
+        '500':
+          description: Server Error
+        '404':
+          description: Id Cart not found
+    delete:
+      summary: Remove All Products from Cart
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path
+          description: ID of the cart
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: All products removed from cart successfully
+        '404':
+          description: Cart not found
+        '500':
+          description: Server Error
+    put:
+      summary: Update Cart
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path
+          description: ID of the cart
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated list of products in the cart
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product:
+                  type: string
+                  description: The ID of the product in the cart
+                quantity:
+                  type: number
+                  description: The quantity of the product in the cart
+              required:
+                - product
+                - quantity
+            example:
+              {
+              "products": [
+                {
+                  "product": "65b19ebc3250bf4167b53ab2",
+                  "quantity": 5
+                },
+                {
+                  "product": "65b19f183250bf4167b53ab6",
+                  "quantity": 2
+                }
+               ]
+              }
+      responses:
+        '200':
+          description: Cart updated successfully
+        '404':
+          description: Cart not found
+        '400':
+          description: Some data is missing or invalid
+
+  /api/carts/{idCart}/products/{idProduct}:
+    post:
+      summary: Add Product to Cart
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path
+          description: ID of the cart
+          required: true
+          schema:
+            type: string
+        - name: idProduct
+          in: path
+          description: ID of the product
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Quantity of the product to be added
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+        examples:
+          example-1:
+            value:
+              quantity: 2
+      security:
+        - JWT: []
+      responses:
+        '200':
+          description: Product added to cart successfully
+        '500':
+          description: Server Error
+        '400':
+          description: Some data is missing or invalid
+    delete:
+      summary: Remove Product from Cart
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path
+          description: ID of the cart
+          required: true
+          schema:
+            type: string
+        - name: idProduct
+          in: path
+          description: ID of the product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product removed from cart successfully
+        '404':
+          description: Cart or product not found
+        '500':
+          description: Server Error
+    put:
+      summary: Update Product Quantity
+      tags:
+        - Carts
+      parameters:
+        - name: idCart
+          in: path
+          description: ID of the cart
+          required: true
+          schema:
+            type: string
+            properties:
+                quantity:
+                  type: number
+        - name: idProduct
+          in: path
+          description: ID of the product
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated quantity of the product in the cart
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+        examples:
+          example-1:
+            value:
+              quantity: 3
+      responses:
+        '200':
+          description: Product quantity updated successfully
+        '404':
+          description: Cart or product not found
+        '500':
+          description: Server Error
+
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Carritos :"
+        carts:
+          type: array
+          items:
+            type: object
+            properties:
+              _id:
+                type: string
+              products:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    product:
+                      type: object
+                      properties:
+                        _id: 
+                          type: string
+                        title: 
+                          type: string
+                        description: 
+                          type: string
+                        price: 
+                          type: number
+                        category: 
+                          type: string
+                        code: 
+                          type: string
+                        stock: 
+                          type: integer
+                        status: 
+                          type: boolean
+                        thumbnails:
+                          type: array
+                          items: 
+                            type: string
+                        owner: 
+                          type: string
+                        ownerEmail: 
+                          type: string
+                        __v: 
+                          type: integer
+                      example:
+                        _id: "65b1a0c13250bf4167b53ae4"
+                        title: "Funda Kindle"
+                        description: "rosa"
+                        price: 30000
+                        category: "Electronica"
+                        code: "dsrcd"
+                        stock: 52
+                        status: true
+                        thumbnails:
+                          - "data:image/jpeg;base64,/9jf//Z"
+                        owner: "Admin"
+                        ownerEmail: "adminCoder@coder.com"
+                        __v: 0
+                    quantity:
+                      type: integer
+                      example: 1
+                  __v:
+                    type: integer
+            __v:
+              type: integer
+

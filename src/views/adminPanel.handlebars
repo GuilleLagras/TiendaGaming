@@ -1,0 +1,48 @@
+<div>
+{{#if users.length}}
+      {{#each users}}
+      {{#ifEqual this.role 'Admin'}}
+              <div class="adminLogged"> <div class="detalle"></div>
+          <h3 class="nameAdmin">- {{this.name}}</h3>      
+          <h4 class="roleAdmin">({{this.role}})</h4>
+          <h5 class="emailAdmin"> {{this.email}}</h5>
+         
+        </div>
+            
+            
+        {{else}}   
+        <div class="adminPanel">
+            <div class="detalle">
+          <h3 class="nameUser">- {{this.name}}</h3>      
+          <h4 class="roleUser">({{this.role}})</h4>
+          <h5 class="emailUser"> {{this.email}}</h5>
+
+    <form method="post" action="/api/users/premium/{{this._id}}/update" id="role-form" class="roles">
+            <label for="Roles">Seleccionar rol</label>
+            <select name="newRole" id="Roles">
+            <option value="User">Usuario</option>
+            <option value="Premium">Premium</option>
+            </select>
+        <input type="hidden" name="userId" value="{{this._id}}">
+        <button type="submit" class="rolButton">Seleccionar</button>
+    </form>
+    </div>
+        
+        <div class="deleteUser">
+        <form action="/api/users/{{this._id}}/delete" method="post">
+        <input type="hidden" name="_method" value="delete">
+        <button type="submit" class="deleteUser"><i class="fa-solid fa-trash-can fa-2xl trash"></i></button>
+      </form>
+      </div>
+        </div>
+         {{/ifEqual}}
+      {{/each}}
+    {{else}}
+      <h1>No se encontraron usuarios</h1>
+    {{/if}}
+
+</div>
+
+
+
+<script src="/js/upgradeRole.js"></script>

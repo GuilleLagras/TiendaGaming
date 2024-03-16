@@ -1,0 +1,194 @@
+paths:
+  /products:
+    get:
+      summary: Get All Products
+      tags:
+        - Products
+      responses:
+        '200':
+          description: All Products 
+        '500':
+          description: Server Error
+        '404':
+          description: Products not found
+    post:
+      summary: Create Product
+      tags:
+        - Products
+      requestBody:
+        description: Information of the product to be created
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        examples:
+          example-1:
+            value:
+              title: "Product example"
+              description: "Description of the product"
+              price: 89000
+              category: "Electronica"
+              code: "PRO123"
+              stock: 50
+              status: true
+              thumbnails:
+                - "https://imagen.com/imagen.jpg"
+                - "https://imagen.com/imagen2.jpg"
+              owner: "Admin"
+              ownerEmail: "adminCoder@coder.com"
+      responses:
+        '200':
+          description: Product created successfully
+        '500':
+          description: Server Error
+        '400':
+          description: Some data is missing
+  /products/{pid}:
+    get:
+      summary: Get Product By Id 
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path 
+          description: ID of the product 
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+              example:
+                title: "Product example"
+                description: "Description of the product"
+                price: 89000
+                category: "Electronica"
+                code: "PRO123"
+                stock: 50
+                status: true
+                thumbnails:
+                  - "https://imagen.com/imagen.jpg"
+                  - "https://imagen.com/imagen2.jpg"
+                owner: "Admin"
+                ownerEmail: "adminCoder@coder.com"
+        '404':
+          description: Product not found
+        '500':
+          description: Server Error
+    put:
+      summary: Update Product By Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: ID of the product
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Updated information of the product
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Product"
+        examples:
+          example-1:
+            value:
+              title: "Updated Product"
+      responses:
+        '200':
+          description: Product updated successfully
+        '400':
+          description: Some data is missing
+        '500':
+          description: Server Error
+        
+    delete:
+      summary: Delete Product By Id
+      tags:
+        - Products
+      parameters:
+        - name: pid
+          in: path
+          description: ID of the product
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Product deleted successfully
+        '404':
+          description: Product not found
+        '500':
+          description: Server Error
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: The unique identifier for the product.
+        title:
+          type: string
+          description: The title of the product.
+        description:
+          type: string
+          description: The description of the product.
+        price:
+          type: number
+          description: The price of the product.
+        category:
+          type: string
+          description: The category of the product.
+        code:
+          type: string
+          description: The code of the product.
+        stock:
+          type: number
+          description: The stock quantity of the product.
+        status:
+          type: boolean
+          description: The status of the product (true for available, false for not available).
+        thumbnails:
+          type: array
+          items:
+            type: string
+          description: URLs of thumbnails for the product.
+        owner:
+          type: string
+          enum:
+            - Admin
+            - Premium
+          default: Admin
+          description: The owner type of the product.
+        ownerEmail:
+          type: string
+          description: The email of the owner of the product.
+      required:
+        - title
+        - price
+        - category
+        - code
+        - ownerEmail
+      example:
+
+        title: "Product example"
+        description: "Description of the product"
+        price: 89000
+        category: "Electronica"
+        code: "PRO123"
+        stock: 50
+        status: true
+        thumbnails:
+          - "https://imagen.com/imagen.jpg"
+        owner: "Admin"
+        ownerEmail: "adminCoder@coder.com"

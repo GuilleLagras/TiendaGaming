@@ -1,0 +1,681 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.navbar-brand {
+  border-radius: 20px;
+  box-shadow: 
+    -10px -10px 15px rgba(0, 0, 0, 0.5), 
+    10px -10px 15px rgba(0, 0, 0, 0.5), 
+    -10px 10px 15px rgba(0, 0, 0, 0.5),  
+    10px 10px 15px rgba(0, 0, 0, 0.5);
+   }
+
+
+    
+
+.nav-link {
+  position: relative;
+  text-decoration: none;
+  color: #e5e5e5; 
+  font-size: 18px;
+  transition: color 0.3s ease-in-out; 
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px; 
+  bottom: 0;
+  left: 0;
+  background-image: linear-gradient(90deg,#FFFF00, rgb(237, 15, 111) , #22c96b/*,* #FFFF00*/) ;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+  text-shadow:  1px 1px 2px rgb(255, 255, 255);
+font-weight: 500; }
+
+.nav-link:hover::before {
+  visibility: visible;
+  transform: scaleX(1); }
+.bg-dark {
+  background-color: #06001b ; 
+  background: linear-gradient(to bottom, #06001b, #000000);
+}
+
+.text-white {
+  color: #ffffff; 
+}
+h2{
+    color: rgb(0, 0, 0);
+    text-align: center;
+
+    margin-bottom: 30px;
+    font-size: 40px;
+}
+.logo:hover{
+    filter: blur(0.5px);
+} 
+.logo {
+
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100px;
+  width: auto;
+  filter: blur(0.7px);
+  border-radius: 20px; 
+/*   box-shadow: 
+    -10px -10px 15px rgb(6,0,27), 
+    10px -10px 15px rgb(6,0,27), 
+    -10px 10px 15px rgb(6,0,27),  
+    10px 10px 15px rgb(6,0,27);  */
+    box-shadow: 
+    -10px -10px 15px rgb(0, 0, 0), 
+    10px -10px 15px rgb(0,0,0) 
+    -10px 10px 15px rgb(0, 0, 0),  
+    10px 10px 15px rgb(0, 0, 0); 
+  
+}  
+
+.cardOwner{
+  display: none;
+}
+
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 70px;
+  }
+
+
+  .cards {
+    border: 1px solid #ccc;
+    text-align: center;
+    font-family:monospace;
+    border-radius: 5px;
+    padding: 30px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .productImage {
+    max-width: 100%;
+    height: 200px;
+    width: 200px;
+  }
+
+
+  .cardTitle {
+    font-size: 30px;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .cardDescription {
+    font-size: 14px;
+    margin-top: 5px;
+  }
+
+  .cardPrice {
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: #007bff; 
+    margin-top: 5px;
+  }
+
+
+  .cardStock {
+    font-size: 14px;
+    margin-top: 5px;
+    color: gray;
+}
+.label{
+  padding-left: 15px;
+  margin: auto 20px ;
+}
+  button {
+    background-color: #000000;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+footer {
+    margin-top: 100px;
+    margin-bottom: 0px;
+    background-color: #06001b ; 
+    color: white;
+    text-align: center;
+    padding: 50px;
+}
+
+#formularioAgregarProducto {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 80%;
+    height: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+     }
+  
+  #formularioAgregarProducto input[type="text"],
+  #formularioAgregarProducto input[type="number"] {
+    width: 40%;
+    padding: 10px;
+    margin: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  #formularioAgregarProducto button[type="submit"] {
+    background-color: #393a3b;
+    color: white;
+    border: none;
+    margin: 20px auto;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  #formularioAgregarProducto button[type="submit"]:hover {
+    background-color: #050000;
+  }
+  .contacto{
+
+    background-image: url('/img/chat.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    padding: 100px;
+  }
+  .btn-outline-dark{
+    background-color: #3535350f;
+    color: rgb(0, 0, 0);
+    border: 2px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.368);
+     margin: 10px auto;
+
+    font-weight: 500;
+    text-shadow: 3px 3px 4px #00000061;
+  }
+  .btn-dark{
+    background-color: #0e0d0d;
+  }
+  .chats{
+    background-color: #000000c9;
+    border-radius: 20px;
+    max-height: 500px;
+    padding: 40px;
+    margin-bottom: 20px;
+    overflow-y: auto;
+  }
+  .contactanos{
+    background-color: rgba(0, 0, 0, 0.637);
+    color: rgb(255, 255, 255);
+    
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+  
+  }
+  .message{
+    color: rgb(252, 252, 252);
+
+    border: 2px solid #e1ff00;
+    box-shadow: 0 0 10px rgba(219, 213, 52, 0.5);
+
+    padding: 5px;
+   margin: 10px 0;
+    border-radius: 15px;
+  }
+
+  .ChatMessage{
+    color: #ccc;
+    font-size: 35px;
+
+    border: 2px solid #06001b; 
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+    padding: 10px;
+
+  }
+  .user{
+    font-size: 15px;
+    font-weight: 500;
+    color: #adabab;
+  }
+  .text{
+    font-size: 28px;
+  }
+  .correo ,.mensaje{
+    margin: 20px;
+    font-size: 20px;
+    font-weight: 400;
+    color: #f6f6f6;
+    
+
+  }
+  .inputCorreo{
+    width: 60%;
+  }
+  .inputMensaje{
+    width: 60%;
+    height: 150px;
+  }
+
+  /* item details*/
+
+  .itemDetail {
+    margin: 50px auto;
+      padding: 40px;
+      display: grid;
+      text-align: center;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: 
+      "img precio"
+      "img botones"
+      "descripcion descripcion";
+      
+  
+  }
+  .imgDetail{
+    grid-area: img;
+          border: 2px solid rgb(176, 172, 172);
+          margin: 30px;
+          width: 500px;
+          height: auto;
+          padding: 30px;
+          border-radius:15px ;
+  
+  }
+  .imgDetail:hover {
+    transform: scale(1.1);
+    transition: 1s;
+  }
+  .detailImg{
+    width: 400px;
+    max-height:800px ;
+  }
+  .detalle{
+    grid-area: precio;
+  
+  }
+  .stock {
+    text-align: center;
+      display: flex;
+      justify-content: center;
+  
+  }
+
+  .cantidadDetail{
+    font-size: 17px;
+    margin: 10px;
+      
+    }
+    .stockNum{
+      color: rgb(116, 114, 114);
+    }
+  .descripcion{
+    grid-area: descripcion;
+    margin-top: 70px;
+    border: 2px solid rgb(176, 172, 172);
+    border-radius: 25px ;
+      padding: 50px;
+  }
+  .botonDetail{
+    width: 50%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 20px;
+    background-color:#06001bba; 
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    font-family: Arial, Helvetica, sans-serif ;
+    font-size: 20px;
+    border-radius: 15px ;
+    margin: 50px auto;
+  }
+  .precioDetail{
+    color: rgb(67, 67, 67);
+    margin-bottom: 25px;
+    font-size: 25px;
+  }
+  .botonDetail:hover{
+  text-shadow:  3px 3px 4px #00fe5567;
+  color: white;
+  background-color:#06001bec
+;
+  }
+  .nombreProducto{
+    font-size: 50px;
+    margin-top: 15px;
+    padding: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .pagination {
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 350px;
+  }
+  .tituloItem{
+    text-align: center;
+    margin: 20px;
+  }
+  /* enlaces de paginacion */
+  .paginationArrow {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #48474767; 
+    color: #000000; 
+    text-decoration: none;
+    border-radius: 3px;
+    margin: 40px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  .paginationArrow:hover{
+    background-color: #e2e1e155; 
+    color: #ff0055; 
+  }
+  .filtros{
+    margin: 20px auto;
+  }
+  .filterButton{
+    background-color: #000000d2;
+    color: #ffff;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 7px 15px;
+  }
+
+  .filterButton:hover{
+  background-color: #0000006e;
+  }
+  .cartList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin: 50px;
+  }
+
+  .cartProduct {
+    width: 95%;
+    display: flex;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px; 
+    overflow: hidden;
+    ;
+  }
+  .cartProduct img{
+  width: 150px;
+  }
+  .CartProductImage {
+    width: 30%; 
+    object-fit: cover;
+  }
+
+  .CartProductTitle {
+    width: 40%; 
+    padding: 10px;
+    text-align: center;
+  }
+
+  .CartProductTitle h2 {
+    margin: 0;
+  }
+
+  .CartProductDescription {
+    margin: 0;
+  }
+
+  .CartQuantity {
+    width: 30%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+  .CartProductPrice {
+    margin: 10px;
+  }
+
+  .CartProductQuantity {
+    margin: 10px;
+  }
+  .checkout{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+  }
+  #total{
+    font-size: 30px;
+    font-weight: 600;
+  }
+ 
+  .sesiones {
+    position: relative;
+
+     background-image: url('/img/login.jpg');
+    background-size: cover;
+    padding: 500px;
+
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.56);
+    z-index: 1;
+  }
+  
+  .sesionesChild {
+    background-color: white;
+    margin: 50px auto;
+    text-align: center;
+    max-width: 600px;
+    max-height: 950px;
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+.cuentas{
+
+  color: grey;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.cuentas:hover{
+
+color: #323232;
+}
+.inicioPorTerceros{
+  display: block;
+  margin-top: 20px;
+  color: rgb(85, 84, 84);
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0px;
+}
+.githubButton{
+  border-radius: 20px;
+  padding: 0;
+  display: block;
+  width: 50%;
+  height: 80px;
+  margin: 40px auto;
+  box-shadow: 6px 15px 20px  rgba(0, 0, 0, 0.513);
+}
+.githubButton:hover{
+  box-shadow: 4px 15px 20px  rgba(0, 0, 0, 0.935);
+}
+.githubButton img{
+  border-radius: 20px;
+}
+.sessionForm{
+  margin: 20px 20px 0px 20px;
+}
+.sessionForm input{
+  margin-bottom: 30px;
+  width: 80%;
+  padding: 5px;
+}
+.sessionForm p {
+  text-align:start;
+  margin-left: 60px;
+}
+.sessionButton{
+  margin-top: 15px;
+  background-color: #000000;
+  color: white ;
+  font-size: 25px;
+  font-weight: 600;
+  border: none; 
+  border-radius: 8px;
+}
+.sessionButton:hover{
+background-color: #282727;
+}
+.productsHeader{
+  display: flex;
+  justify-content: space-between;
+}
+.productsHeader button{
+  display: block;
+  margin: 5px;
+  width: 200px;
+  font-size: auto;
+}
+.productsHeader button:hover, .signout:hover{
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  color: white;
+  }
+.signout{
+  font-weight: 600;
+  border: none; 
+  border-radius: 8px;
+}
+
+.userInterface {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #33333313;
+  width: 100%;
+}
+
+.loggedUser,
+.signoff {
+  display: flex;
+}
+
+
+
+.UserProfile,
+.signout {
+  text-decoration: none; 
+  color: #ffffff; 
+}
+
+.UserProfile:hover {
+  color: white; 
+  font-weight: 500;
+  text-shadow: 3px 3px 4px #22c96b;
+}
+.signout:hover{
+  color: white; 
+  font-weight: 500;
+  text-shadow: 3px 3px 4px rgb(237, 15, 111);
+}
+#carrito{
+  position: fixed;
+      top: 30px;
+      right: 20px;
+       z-index: 999; 
+  border-radius: 50px;
+  padding: 20px;
+  background-color: #22c96b;
+}
+#carrito:hover{
+  box-shadow: 0 0 10px #00ff00;
+}
+#carrito .badge {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background-color: rgb(237, 15, 111);
+  color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
+.purchased{
+  padding: 50px;
+}
+.multerTitle{
+  display: block;
+  margin: 20px auto;
+}
+.adminPanel ,.adminLogged {
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  font-family:monospace;
+  text-align: center;
+  border-radius: 5px;
+  padding: 20px;
+  width: 90%;
+  margin: 50px auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.deleteUser{
+  margin :50px;
+  padding: 20px;
+  cursor: pointer;
+}
+.nameUser, .trash{
+  color:rgb(237, 15, 111) ;
+
+}
+
+.roleUser{
+  color:#1c9c54;
+}
+.emailUser{
+  color: #282727de;
+}
+.deleteUser{
+  background-color: #007bff00;
+  margin: 20px;
+  
+}
+.adminLogged{
+  background-color: #00000044;
+}

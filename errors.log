@@ -1,0 +1,19 @@
+{
+  message: 'Este es un mensaje de nivel error',
+  level: 'error',
+  timestamp: '2024-01-13T18:50:20.533Z'
+}
+{
+  message: 'Este es un mensaje de nivel fatal',
+  level: 'fatal',
+  timestamp: '2024-01-13T18:50:20.536Z'
+}
+{
+  name: 'AuthorizationError',
+  message: 'The redirect_uri MUST match the registered callback URL for this application.',
+  code: 'redirect_uri_mismatch',
+  uri: 'https://docs.github.com/apps/managing-oauth-apps/troubleshooting-authorization-request-errors/#redirect-uri-mismatch',
+  status: 500,
+  level: 'error',
+  timestamp: '2024-03-16T15:45:22.285Z'
+}

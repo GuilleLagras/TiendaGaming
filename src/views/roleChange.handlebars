@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div>
+  <p>Rol actual: {{currentRole}}</p>
+<div class="detalle"></div>
+  <form method="post" action="/api/users/premium/{{userId}}/update" id="role-form" class="roles">
+    <label for="Roles">Seleccionar rol</label>
+    <select name="newRole" id="Roles">
+      <option value="User">Usuario</option>
+      <option value="Premium">Premium</option>
+    </select>
+    <input type="hidden" name="userId" value="{{userId}}">
+    <button type="submit" class="rolButton">Seleccionar</button>
+  </form>
+</div>
+<script src="/js/upgradeRole.js"></script>
+</body>
+</html>
