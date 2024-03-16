@@ -7,7 +7,6 @@ import { allowInsecurePrototypeAccess } from '@handlebars/allow-prototype-access
 import Handlebars from 'handlebars';
 
 import flash from "express-flash";
-//import compression from "express-compression";
 import { Server } from "socket.io";
 
 import productsRouter from "./Routes/products.routes.js";
